@@ -11,6 +11,9 @@
   "devDependencies": {
     "babel-preset-es2015-without-strict": "0.0.2",
     "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-babel": "^6.1.2"
+    "gulp-babel": "^6.1.2",
+    "gulp-foreach": "^0.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2"
   }
 }

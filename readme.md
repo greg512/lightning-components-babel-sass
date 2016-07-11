@@ -7,7 +7,7 @@ An attempt to build Salesforce lightning components with modern front end build 
 ## Project Goals
 
 - Develop lightning components with latest version of JavaScript using [Babel](https://babeljs.io/)
-- Compile [SASS]{http://sass-lang.com/} files to lightning component CSS resources
+- Compile [SASS](http://sass-lang.com/) files to lightning component CSS resources
 - Work with the tools I'm already using for Salesforce development (Atom, MavensMate)
 
 ## Project Challenges
@@ -16,7 +16,4 @@ Achieving the project's goals requires using local development tools to transpil
 
 ## TODOs
 
-- Ignore xml files when copying from src to development directory.
-- Compile .css files with SASS
-    - Probably need to change .css file extension to .scss when copied from src/aura to aura-dev
-- If a file is saved in aura-dev then copied into src/aura, automatically save to salesforce (This would also show compilation errors from salesforce)
+- If a file is saved in aura-dev and copied into src/aura, automatically save to salesforce (This would also show compilation errors from salesforce)
