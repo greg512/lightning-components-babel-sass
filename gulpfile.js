@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var babel = require('gulp-babel');
 var rename = require('gulp-rename');
 var sass = require('gulp-sass');
+var spawn = require('child_process').spawn;
 
 var AURA_SRC_DIR = 'src/aura';
 var AURA_DEV_DIR = 'aura-dev';
@@ -64,18 +65,33 @@ function watchDev() {
 */
 function fileChangehandler(filePath) {
     var fileExt = getFileExtension(filePath);
-    switch(fileExt) {
-        case 'js':
-        transpile(filePath);
-        break;
+    copyToSrc().then(function(result) {
+        var srcPath = convertDevPathToSrcPath(filePath),
+            updateCmd = spawn('mavensmate', ['compile-metadata', srcPath]);
+        updateCmd.stdout.on('data', function(data) {
+            console.log(`SUCCESS: ${data}`);
+        });
 
-        case 'scss':
-        compileSASS(filePath);
-        break;
+        updateCmd.stderr.on('data', function(data) {
+            console.log(`ERROR: ${data}`);
+        });
 
-        default:
-        moveToSrc(filePath);
+    });
+    function copyToSrc() {
+        return new Promise(function(resolve, reject) {
+            switch(fileExt) {
+                case 'js':
+                resolve(transpile(filePath));
+                break;
 
+                case 'scss':
+                resolve(compileSASS(filePath));
+                break;
+
+                default:
+                resolve(moveToSrc(filePath));
+            }
+        });
     }
 }
 
